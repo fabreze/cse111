@@ -51,7 +51,7 @@ while(is_open):
     print(f"\nThe approximate volume is {volume:.2f} liters")
 
     with open("volumes.txt", mode="at") as file:
-        file.write(f"{current_date}, {width}, {aspect_ratio}, {diameter}, {volume}\n")
+        file.write(f"{current_date}, {width}, {aspect_ratio}, {diameter}, {volume:.2f}\n")
     
     print("\nThis calculation has been recorded.")
 
