@@ -5,11 +5,21 @@ Author: Fabrizio Caballero
 import cssutils
 
 def main():
-    print(calculate_contrast_ratio('#000000','#FFFFFF'))
+    
     return
 
 def read_css(file_name):
+    
     return
+
+#Parses a string into a list representing the rgb values of a color.
+def parse_rgb(rgb_string):
+    rgb_string = rgb_string.strip('rgb() ')
+    rgb_values = rgb_string.split(',')
+    rgb = []
+    for value in rgb_values:
+        rgb.append(int(value))
+    return rgb
 
 # Converts hexcode represented in a string, into a list with three values, representing the red, blue, and green values in a color.
 def hex_to_rgb(hexcode):
@@ -19,6 +29,7 @@ def hex_to_rgb(hexcode):
         rgb.append(int(hexcode[i:i+2], 16))
     return rgb
 
+# Converts a standard rgb value into linear rgb value.
 def srgb_to_linear(rgb_value):
     if rgb_value <= 0.04045:
         return rgb_value / 12.92
@@ -36,18 +47,25 @@ def calculate_relative_luminance(rgb):
     blue_linear = srgb_to_linear(blue)
 
     
-    relative_luminance = 0.2126 * red_linear + 0.7152 * green_linear + 0.0722 * blue_linear
+    relative_luminance = (0.2126 * red_linear) + (0.7152 * green_linear) + (0.0722 * blue_linear)
     return relative_luminance
 
+# Asks the user for a text color and background color, then calculates the contrast ratio between the two colors.
+def calculate_contrast_ratio(textColor, backgroundColor, colorSystem='hexcode'):
+    rgb1 = []
+    rgb2 = []
 
-def calculate_contrast_ratio(hexcode1, hexcode2):
-    rgb1 = hex_to_rgb(hexcode1)
-    rgb2 = hex_to_rgb(hexcode2)
+    if colorSystem == 'hexcode':
+        rgb1 = hex_to_rgb(textColor)
+        rgb2 = hex_to_rgb(backgroundColor)
+    elif colorSystem == 'rgb':
+        rgb1 = parse_rgb(textColor)
+        rgb2 = parse_rgb(backgroundColor)
 
     relative_luminance1 = calculate_relative_luminance(rgb1)
     relative_luminance2 = calculate_relative_luminance(rgb2)
 
-    contrast_ratio = relative_luminance1 + 0.05 / relative_luminance2 + 0.05
+    contrast_ratio = (relative_luminance1 + 0.05) / (relative_luminance2 + 0.05)
     return contrast_ratio
 
 name = "__main__"

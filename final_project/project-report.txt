@@ -1,0 +1,33 @@
+Student Project Report
+
+Do the following:
+
+1. In the table below, list the dates, amount of time spent, and
+description of the work that you did on your project. Follow the example
+that is in the first row of the table below. Include the time you spent
+doing any of the following:
+    a. discussing your project with your teacher, tutor, or fellow students
+    b. researching by reading articles and watching applicable videos
+    c. designing your project by drawing diagrams and other applicable documents
+    d. writing experimental code
+    d. writing code for your project
+    e. writing test functions
+    f. debugging your code
+    g. any other activity that helped you complete your project
+
+=============Example====================
+            Time Spent
+   Date       (hours)   Description of Work
+----------  ----------  -------------------------
+2025-12-04       2     Researched how to calculate relative luminance and contrast ratio as well as learning the formulas
+2025-12-04       2     Read documentation on cssutils python module.
+2025-12-05       3     Wrote the code for the functions that calculate contrast ratio and convert hex to rgb.
+2025-12-05       1     Experimented with converting HSL to RGB but scrapped the idea due to scope
+2025-12-05       3     Wrote code for the read css function
+=============Example====================
+
+
+
+2. In Canvas, submit this completed text file, your Python program, your
+Python test file, and any project data files such as .txt and .csv files and
+link to video walkthrough if needed.
