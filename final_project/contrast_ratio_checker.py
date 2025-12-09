@@ -5,17 +5,69 @@ Author: Fabrizio Caballero
 import cssutils
 
 def main():
-    read_css('styles.css')
-    return
+    css_dictionary = read_css_file('styles.css')
+    for selector in css_dictionary:
+        text_color = css_dictionary[selector]['text_color']
+        background_color = css_dictionary[selector]['background_color']
+        text_color_type = css_dictionary[selector]['text_color_type']
+        background_color_type = css_dictionary[selector]['background_color_type']
 
-def read_css(file_name):
+        contrast_ratio = calculate_contrast_ratio(text_color, background_color, text_color_type, background_color_type)
+
+        if contrast_ratio < 4.5:
+            print(f"Selector: {selector} has a contrast ratio of {contrast_ratio:.2f} - FAIL")
+        else:
+            print(f"Selector: {selector} has a contrast ratio of {contrast_ratio:.2f} - PASS")
+
+
+def expand_hex_color(hexcode):
+    expanded_hex = ''
+    if len(hexcode) == 4:
+        for char in (1,2,3):
+            expanded_hex += hexcode[char] * 2
+        expanded_hex = '#' + expanded_hex
+        return expanded_hex
+    else:
+        return hexcode
+        
+
+def read_css_file(file_name):
     try:
-        with open(file_name, 'r') as css_file:
-            css_content = cssutils.parseFile(css_file)
-            print(css_content)
+        sheet = cssutils.parseFile(file_name)
+        css_dictionary = {}
+        
+        for rule in sheet:
+            if rule.type == rule.STYLE_RULE:
+                selector = rule.selectorText
+                text_color = rule.style.getPropertyValue('color')
+                background_color = rule.style.getPropertyValue('background-color')
+                text_color_type = ''
+                background_color_type = ''
+
+                if text_color and background_color:
+                    if 'rgb' in text_color:
+                        text_color_type = 'rgb'
+                    elif '#' in text_color:
+                        text_color_type = 'hexcode'
+                        text_color = expand_hex_color(text_color)
+                    else:
+                        text_color_type = 'unsupported color format'
+                    
+                    if 'rgb' in background_color:
+                        background_color_type = 'rgb'   
+                    elif '#' in background_color:
+                        background_color_type = 'hexcode'
+                        background_color = expand_hex_color(background_color)
+                    else:
+                        background_color_type = 'unsupported color format'
+
+                    rule_dictionary = {'text_color': text_color, 'text_color_type': text_color_type ,'background_color': background_color, 'background_color_type': background_color_type}
+                    css_dictionary[selector] = rule_dictionary
+
     except FileNotFoundError:
         print(f"Error: The file '{file_name}' was not found.")
-    return
+
+    return css_dictionary
 
 #Parses a string into a list representing the rgb values of a color.
 def parse_rgb(rgb_string):
@@ -56,15 +108,18 @@ def calculate_relative_luminance(rgb):
     return relative_luminance
 
 # Asks the user for a text color and background color, then calculates the contrast ratio between the two colors.
-def calculate_contrast_ratio(textColor, backgroundColor, colorSystem='hexcode'):
+def calculate_contrast_ratio(textColor, backgroundColor, textColorType, backgroundColorType):
     rgb1 = []
     rgb2 = []
 
-    if colorSystem == 'hexcode':
+    if textColorType == 'hexcode':
         rgb1 = hex_to_rgb(textColor)
-        rgb2 = hex_to_rgb(backgroundColor)
-    elif colorSystem == 'rgb':
+    elif textColorType == 'rgb':
         rgb1 = parse_rgb(textColor)
+
+    if backgroundColorType == 'hexcode':
+        rgb2 = hex_to_rgb(backgroundColor)
+    elif backgroundColorType == 'rgb':
         rgb2 = parse_rgb(backgroundColor)
 
     relative_luminance1 = calculate_relative_luminance(rgb1)

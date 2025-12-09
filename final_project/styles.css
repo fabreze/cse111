@@ -5,6 +5,7 @@ body {
 
 h1 {
     color: rgb(0, 0, 255);
+    background-color: rgb(255, 255, 0);
     font-size: 36px;
 }
 
