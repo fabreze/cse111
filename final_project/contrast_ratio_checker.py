@@ -5,11 +5,16 @@ Author: Fabrizio Caballero
 import cssutils
 
 def main():
-    
+    read_css('styles.css')
     return
 
 def read_css(file_name):
-    
+    try:
+        with open(file_name, 'r') as css_file:
+            css_content = cssutils.parseFile(css_file)
+            print(css_content)
+    except FileNotFoundError:
+        print(f"Error: The file '{file_name}' was not found.")
     return
 
 #Parses a string into a list representing the rgb values of a color.
