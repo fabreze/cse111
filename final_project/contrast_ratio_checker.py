@@ -5,7 +5,7 @@ Author: Fabrizio Caballero
 import cssutils
 
 def main():
-    css_dictionary = read_css_file('styles.css')
+    css_dictionary = read_css_file('C:\GitHub\cse111\\final_project\styles.css')
     for selector in css_dictionary:
         text_color = css_dictionary[selector]['text_color']
         background_color = css_dictionary[selector]['background_color']
@@ -19,7 +19,7 @@ def main():
         else:
             print(f"Selector: {selector} has a contrast ratio of {contrast_ratio:.2f} - PASS")
 
-
+#If the hexcode is in shorthand format, expand it to full format.
 def expand_hex_color(hexcode):
     expanded_hex = ''
     if len(hexcode) == 4:
@@ -30,7 +30,7 @@ def expand_hex_color(hexcode):
     else:
         return hexcode
         
-
+# Reads a CSS file and creates a dictionary with the selectors as keys and their text and background colors as values.
 def read_css_file(file_name):
     try:
         sheet = cssutils.parseFile(file_name)
@@ -64,10 +64,10 @@ def read_css_file(file_name):
                     rule_dictionary = {'text_color': text_color, 'text_color_type': text_color_type ,'background_color': background_color, 'background_color_type': background_color_type}
                     css_dictionary[selector] = rule_dictionary
 
+        return css_dictionary
+
     except FileNotFoundError:
         print(f"Error: The file '{file_name}' was not found.")
-
-    return css_dictionary
 
 #Parses a string into a list representing the rgb values of a color.
 def parse_rgb(rgb_string):
