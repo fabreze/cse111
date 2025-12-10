@@ -1,6 +1,6 @@
 """
 Author: Fabrizio Caballero
-
+This program reads a CSS file, extracts text and background colors from each css rule, and calculates the contrast ratio between them.
 """
 import cssutils
 import logging
