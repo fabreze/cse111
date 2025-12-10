@@ -1,0 +1,396 @@
+body {
+    color: #000000;
+    background-color: #ffffff;
+}
+
+.header {
+    color: #333;
+    background: #f8f8f8;
+}
+
+.nav {
+    color: #f00;
+    background-color: #00f;
+}
+
+.content {
+    color: rgb(51, 51, 51);
+    background-color: rgb(255, 255, 255);
+}
+
+.transparent-bg {
+    color: #000;
+    background-color: rgba(255, 255, 255, 0.9);
+}
+
+.mixed {
+    color: #fff;
+    background-color: rgb(0, 0, 0);
+}
+
+.named-colors {
+    color: black;
+    background-color: white;
+}
+
+.poor-contrast-1 {
+    color: #777777;
+    background-color: #888888;
+}
+
+.poor-contrast-2 {
+    color: rgb(170, 170, 170);
+    background-color: rgb(180, 180, 180);
+}
+
+.large-text-ok {
+    color: #666666;
+    background-color: #ffffff;
+}
+
+.excellent-contrast {
+    color: #000000;
+    background-color: #ffff00;
+}
+
+.hex-shorthand {
+    color: #abc;
+    background-color: #def;
+}
+
+.hex-shorthand-2 {
+    color: #09f;
+    background-color: #fff;
+}
+
+.uppercase-hex {
+    color: #FFFFFF;
+    background-color: #000000;
+}
+
+#main-container {
+    color: #222;
+    background-color: #eee;
+}
+
+.container>.inner {
+    color: rgb(34, 34, 34);
+    background-color: rgb(238, 238, 238);
+}
+
+input[type="text"] {
+    color: #000;
+    background-color: #fff;
+    border: 1px solid #ccc;
+}
+
+.btn,
+.button,
+input[type="submit"] {
+    color: white;
+    background-color: #007bff;
+}
+
+.btn:hover {
+    color: #fff;
+    background-color: #0056b3;
+}
+
+:root {
+    --primary-color: #3498db;
+    --secondary-color: #2ecc71;
+    --text-color: #2c3e50;
+    --bg-color: #ecf0f1;
+}
+
+.themed {
+    color: var(--text-color);
+    background-color: var(--bg-color);
+}
+
+a:link {
+    color: #0000ee;
+    background-color: transparent;
+}
+
+a:visited {
+    color: #551a8b;
+    background-color: transparent;
+}
+
+@media (max-width: 768px) {
+    .responsive {
+        color: #000;
+        background-color: #f0f0f0;
+    }
+}
+
+.card {
+    color: #333;
+    background: #fff;
+}
+
+.card .title {
+    color: #000;
+    background: transparent;
+}
+
+.card .description {
+    color: #666;
+    background: #f9f9f9;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+    color: #2c3e50;
+    background-color: transparent;
+}
+
+p {
+    color: #34495e;
+    background-color: inherit;
+}
+
+.text-primary {
+    color: #007bff !important;
+}
+
+.bg-light {
+    background-color: #f8f9fa !important;
+}
+
+.text-dark {
+    color: #343a40 !important;
+}
+
+.bg-dark {
+    background-color: #343a40 !important;
+}
+
+.text-muted {
+    color: #6c757d;
+}
+
+.alert-success {
+    color: #155724;
+    background-color: #d4edda;
+}
+
+.alert-danger {
+    color: #721c24;
+    background-color: #f8d7da;
+}
+
+.alert-warning {
+    color: #856404;
+    background-color: #fff3cd;
+}
+
+.alert-info {
+    color: #0c5460;
+    background-color: #d1ecf1;
+}
+
+.gradient-bg {
+    color: white;
+    background: linear-gradient(to right, #667eea 0%, #764ba2 100%);
+}
+
+.multi-bg {
+    color: black;
+    background: url('image.jpg'), rgba(255, 255, 255, 0.9);
+}
+
+.current-color-example {
+    color: #333;
+    border: 1px solid currentColor;
+    background-color: #fff;
+}
+
+.inherit-example {
+    color: inherit;
+    background-color: inherit;
+}
+
+.hsl-colors {
+    color: hsl(0, 100%, 50%);
+    background-color: hsl(120, 100%, 50%);
+}
+
+.hsla-colors {
+    color: hsla(240, 100%, 50%, 0.7);
+    background-color: hsla(60, 100%, 50%, 0.5);
+}
+
+.system-colors {
+    color: ButtonText;
+    background-color: ButtonFace;
+}
+
+.new-colors {
+    color: rebeccapurple;
+    background-color: transparent;
+}
+
+.empty-color {
+    color: ;
+    background-color: #fff;
+}
+
+.no-bg-color {
+    color: #000;
+    background-color: ;
+}
+
+.only-text {
+    color: #333;
+}
+
+.only-bg {
+    background-color: #eee;
+}
+
+.similar-1 {
+    color: #fefefe;
+    background-color: #ffffff;
+}
+
+.similar-2 {
+    color: #010101;
+    background-color: #000000;
+}
+
+.max-contrast {
+    color: #000000;
+    background-color: #ffffff;
+}
+
+.min-contrast {
+    color: #aaaaaa;
+    background-color: #bbbbbb;
+}
+
+.accessible-1 {
+    color: #005a9c;
+    background-color: #ffffff;
+}
+
+.accessible-2 {
+    color: #ffffff;
+    background-color: #005a9c;
+}
+
+.accessible-3 {
+    color: #d04437;
+    background-color: #fce8e6;
+}
+
+.cb-friendly-1 {
+    color: #006400;
+    background-color: #f5f5f5;
+}
+
+.cb-friendly-2 {
+    color: #8b4513;
+    background-color: #fffacd;
+}
+
+.dark-mode {
+    color: #e0e0e0;
+    background-color: #121212;
+}
+
+.dark-mode-card {
+    color: #ffffff;
+    background-color: #1e1e1e;
+}
+
+@media print {
+    .print-only {
+        color: #000000;
+        background-color: #ffffff;
+    }
+}
+
+.grid-container {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 20px;
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+    }
+
+    to {
+        opacity: 1;
+    }
+}
+
+.animated {
+    color: #000;
+    background-color: #fff;
+    animation: fadeIn 1s;
+}
+
+.complex-selector {
+    color: #123456;
+    background-color: #abcdef;
+}
+
+.important-styles {
+    color: red !important;
+    background-color: yellow !important;
+}
+
+.vendor-prefixed {
+    -webkit-text-fill-color: #000;
+    background: -webkit-linear-gradient(#eee, #333);
+}
+
+.unicode-✓ {
+    color: #000;
+    background-color: #fff;
+}
+
+div.container>section.main>article.post>header>h1.title {
+    color: #2c3e50;
+    background-color: #ecf0f1;
+}
+
+[data-theme="dark"] {
+    color: #ffffff;
+    background-color: #000000;
+}
+
+.article {
+    color: #333;
+    background: #fff;
+}
+
+.article h2 {
+    color: #000;
+    background: transparent;
+}
+
+.article p {
+    color: #666;
+    background: inherit;
+}
+
+.modal-overlay {
+    color: #333;
+    background-color: rgba(0, 0, 0, 0.5);
+}
+
+.modal-content {
+    color: #2c3e50;
+    background-color: #ffffff;
+    border: 1px solid #bdc3c7;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+}

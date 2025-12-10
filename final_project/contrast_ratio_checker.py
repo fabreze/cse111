@@ -3,36 +3,45 @@ Author: Fabrizio Caballero
 
 """
 import cssutils
+import logging
+
 
 def main():
-    file_path = 'C:\\GitHub\\cse111\\final_project\\styles.css'
-    css_dictionary = read_css_file(file_path)
+    file_path = 'C:\\GitHub\\cse111\\final_project\\large_styles.css'
 
     print("****************************************************************************************************************\n")
     print(f"Color Contrast Checker for {file_path} using WCAG AA standards")
     print("Supported color formats: hexcode and rgb()\n")
     print("****************************************************************************************************************\n")
+
+    css_dictionary = read_css_file(file_path)
     
+    if css_dictionary:
+        for selector in css_dictionary:
+            text_color = css_dictionary[selector]['text_color']
+            background_color = css_dictionary[selector]['background_color']
+            text_color_type = css_dictionary[selector]['text_color_type']
+            background_color_type = css_dictionary[selector]['background_color_type']
 
-    for selector in css_dictionary:
-        text_color = css_dictionary[selector]['text_color']
-        background_color = css_dictionary[selector]['background_color']
-        text_color_type = css_dictionary[selector]['text_color_type']
-        background_color_type = css_dictionary[selector]['background_color_type']
+            if(text_color_type == 'unsupported color format' or background_color_type == 'unsupported color format'):
+                print(f"Class/Selector: {selector}")
+                print("Unsupported color format detected. Only hexcode and rgb() formats are supported.\n")
+                print("----------------------------------------------------------------------------------------------------------------\n")
+                continue
+            else:
+                contrast_ratio = calculate_contrast_ratio(text_color, background_color, text_color_type, background_color_type)
 
-        contrast_ratio = calculate_contrast_ratio(text_color, background_color, text_color_type, background_color_type)
-        
-        print(f"Class/Selector: {selector}")
-        if contrast_ratio >= 4.5:
-            print(f"Small Text - Contrast Ratio: {contrast_ratio:.2f} - PASS")
-        else:
-            print(f"Small Text - Contrast Ratio: {contrast_ratio:.2f} - FAIL")
+                print(f"Class/Selector: {selector}")
+                if contrast_ratio >= 4.5:
+                    print(f"Small Text - Contrast Ratio: {contrast_ratio:.2f} - PASS")
+                else:
+                    print(f"Small Text - Contrast Ratio: {contrast_ratio:.2f} - FAIL")
 
-        if contrast_ratio >= 3.0:
-            print(f"Large Text - Contrast Ratio: {contrast_ratio:.2f} - PASS\n")
-        else:
-            print(f"Large Text - Contrast Ratio: {contrast_ratio:.2f} - FAIL\n")
-        print("----------------------------------------------------------------------------------------------------------------\n")
+                if contrast_ratio >= 3.0:
+                    print(f"Large Text - Contrast Ratio: {contrast_ratio:.2f} - PASS\n")
+                else:
+                    print(f"Large Text - Contrast Ratio: {contrast_ratio:.2f} - FAIL\n")
+                print("----------------------------------------------------------------------------------------------------------------\n")
 
 #If the hexcode is in shorthand format, expand it to full format.
 def expand_hex_color(hexcode):
@@ -48,6 +57,7 @@ def expand_hex_color(hexcode):
 # Reads a CSS file and creates a dictionary with the selectors as keys and their text and background colors as values.
 def read_css_file(file_name):
     try:
+        cssutils.log.setLevel(logging.CRITICAL)  # Suppress cssutils warnings
         sheet = cssutils.parseFile(file_name)
         css_dictionary = {}
         
@@ -60,7 +70,7 @@ def read_css_file(file_name):
                 background_color_type = ''
 
                 if text_color and background_color:
-                    if 'rgb' in text_color:
+                    if 'rgb(' in text_color:
                         text_color_type = 'rgb'
                     elif '#' in text_color:
                         text_color_type = 'hexcode'
@@ -68,7 +78,7 @@ def read_css_file(file_name):
                     else:
                         text_color_type = 'unsupported color format'
                     
-                    if 'rgb' in background_color:
+                    if 'rgb(' in background_color:
                         background_color_type = 'rgb'   
                     elif '#' in background_color:
                         background_color_type = 'hexcode'
@@ -83,6 +93,10 @@ def read_css_file(file_name):
 
     except FileNotFoundError:
         print(f"Error: The file '{file_name}' was not found.")
+        return 
+    except Exception as e:
+        print(f"Error parsing CSS file: {e}")
+        return
 
 #Parses a string into a list representing the rgb values of a color.
 def parse_rgb(rgb_string):

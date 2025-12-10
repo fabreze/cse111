@@ -19,11 +19,13 @@ doing any of the following:
             Time Spent
    Date       (hours)   Description of Work
 ----------  ----------  -------------------------
-2025-12-04       2     Researched how to calculate relative luminance and contrast ratio as well as learning the formulas
-2025-12-04       2     Read documentation on cssutils python module.
-2025-12-05       3     Wrote the code for the functions that calculate contrast ratio and convert hex to rgb.
-2025-12-05       1     Experimented with converting HSL to RGB but scrapped the idea due to scope
-2025-12-05       3     Wrote code for the read css function
+2025-12-05       2     Researched how to calculate relative luminance and contrast ratio as well as learning the formulas
+2025-12-05       2     Read documentation on cssutils python module.
+2025-12-06       3     Wrote the code for the functions that calculate contrast ratio and convert hex to rgb.
+2025-12-06       1     Experimented with converting HSL to RGB but scrapped the idea due to scope
+2025-12-08       4     Wrote code for the read css function
+2025-12-08       2     Wrote the main function and fixed bugs
+2025-12-09       3     Created test file and functions
 =============Example====================
 
 
