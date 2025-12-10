@@ -5,7 +5,15 @@ Author: Fabrizio Caballero
 import cssutils
 
 def main():
-    css_dictionary = read_css_file('C:\GitHub\cse111\\final_project\styles.css')
+    file_path = 'C:\\GitHub\\cse111\\final_project\\styles.css'
+    css_dictionary = read_css_file(file_path)
+
+    print("****************************************************************************************************************\n")
+    print(f"Color Contrast Checker for {file_path} using WCAG AA standards")
+    print("Supported color formats: hexcode and rgb()\n")
+    print("****************************************************************************************************************\n")
+    
+
     for selector in css_dictionary:
         text_color = css_dictionary[selector]['text_color']
         background_color = css_dictionary[selector]['background_color']
@@ -13,11 +21,18 @@ def main():
         background_color_type = css_dictionary[selector]['background_color_type']
 
         contrast_ratio = calculate_contrast_ratio(text_color, background_color, text_color_type, background_color_type)
-
-        if contrast_ratio < 4.5:
-            print(f"Selector: {selector} has a contrast ratio of {contrast_ratio:.2f} - FAIL")
+        
+        print(f"Class/Selector: {selector}")
+        if contrast_ratio >= 4.5:
+            print(f"Small Text - Contrast Ratio: {contrast_ratio:.2f} - PASS")
         else:
-            print(f"Selector: {selector} has a contrast ratio of {contrast_ratio:.2f} - PASS")
+            print(f"Small Text - Contrast Ratio: {contrast_ratio:.2f} - FAIL")
+
+        if contrast_ratio >= 3.0:
+            print(f"Large Text - Contrast Ratio: {contrast_ratio:.2f} - PASS\n")
+        else:
+            print(f"Large Text - Contrast Ratio: {contrast_ratio:.2f} - FAIL\n")
+        print("----------------------------------------------------------------------------------------------------------------\n")
 
 #If the hexcode is in shorthand format, expand it to full format.
 def expand_hex_color(hexcode):
@@ -125,7 +140,18 @@ def calculate_contrast_ratio(textColor, backgroundColor, textColorType, backgrou
     relative_luminance1 = calculate_relative_luminance(rgb1)
     relative_luminance2 = calculate_relative_luminance(rgb2)
 
-    contrast_ratio = (relative_luminance1 + 0.05) / (relative_luminance2 + 0.05)
+    dark_relative_luminance = 0
+    light_relative_luminance = 0
+
+    if(relative_luminance1 <= relative_luminance2):
+        dark_relative_luminance = relative_luminance1
+        light_relative_luminance = relative_luminance2
+    else:
+        dark_relative_luminance = relative_luminance2
+        light_relative_luminance = relative_luminance1
+        
+
+    contrast_ratio = (light_relative_luminance + 0.05) / (dark_relative_luminance + 0.05)
     return contrast_ratio
 
 name = "__main__"
